@@ -11,7 +11,7 @@ func SendSlack(userID, tweet string) error {
 	channel := "search-tsukuba"
 	token := os.Getenv("SLACK_TSUKUBA_TOKEN")
 	endpoint := "https://slack.com/api/chat.postMessage"
-	message := "@" + userID + ": " + tweet
+	message := "@" + userID + ": " + tweet + "\nhttps://twitter.com/" + userID
 
 	values := url.Values{}
 	values.Set("token", token)
