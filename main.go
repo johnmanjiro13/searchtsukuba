@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/url"
 	"os"
+	"strings"
 
 	"github.com/johnmanjiro13/searchtsukuba/keys"
 )
@@ -21,6 +22,9 @@ func main() {
 		os.Exit(1)
 	}
 	for _, t := range timeline {
-		fmt.Println(t.Text)
+		tweet := t.FullText
+		if strings.Contains(tweet, "つくば") {
+			fmt.Println(tweet)
+		}
 	}
 }
