@@ -8,7 +8,7 @@ import (
 )
 
 func SendSlack(userID, tweet string) error {
-	channel := "search-tsukuba"
+	channel := os.Getenv("SLACK_TSUKUBA_CHANNEL")
 	token := os.Getenv("SLACK_TSUKUBA_TOKEN")
 	endpoint := "https://slack.com/api/chat.postMessage"
 	message := "@" + userID + ": " + tweet + "\nhttps://twitter.com/" + userID
