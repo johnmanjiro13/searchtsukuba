@@ -1,7 +1,6 @@
 ﻿package main
 
 import (
-	"fmt"
 	"log"
 	"net/url"
 	"os"
@@ -14,17 +13,16 @@ import (
 func main() {
 	api := keys.GetTwitterAPI()
 
-	v := url.Values{}
-	v.Set("count", "20")
+	values := url.Values{}
+	values.Set("count", "20")
 
-	timeline, err := api.GetHomeTimeline(v)
+	timeline, err := api.GetHomeTimeline(values)
 	if err != nil {
 		log.Fatal(err)
 		os.Exit(1)
 	}
 	for _, t := range timeline {
 		if isContainsTsukuba(t.FullText) {
-			fmt.Println(t.FullText)
 			slack.SendSlack(t.User.ScreenName, t.FullText)
 		}
 	}
