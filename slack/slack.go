@@ -23,10 +23,10 @@ func SendSlack(userID, tweet string) error {
 		endpoint,
 		bytes.NewBufferString(values.Encode()),
 	)
-	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 	if err != nil {
 		return err
 	}
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
