@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/johnmanjiro13/searchtsukuba/keys"
+	"github.com/johnmanjiro13/searchtsukuba/slack"
 )
 
 func main() {
@@ -22,9 +23,16 @@ func main() {
 		os.Exit(1)
 	}
 	for _, t := range timeline {
-		tweet := t.FullText
-		if strings.Contains(tweet, "つくば") {
-			fmt.Println(tweet)
+		if isContainsTsukuba(t.FullText) {
+			fmt.Println(t.FullText)
+			slack.SendSlack(t.User.ScreenName, t.FullText)
 		}
 	}
+}
+
+func isContainsTsukuba(tweet string) bool {
+	if strings.Contains(tweet, "つくば") || strings.Contains(tweet, "筑波") {
+		return true
+	}
+	return false
 }
