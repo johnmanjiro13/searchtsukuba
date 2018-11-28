@@ -18,7 +18,7 @@ func main() {
 
 	timeline, err := api.GetHomeTimeline(values)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		os.Exit(1)
 	}
 	for _, t := range timeline {
